@@ -141,9 +141,10 @@ class pets:
 		                                  patience=1, verbose=0, mode='auto', cooldown=0, min_lr=0)
 		 
 		#For this exercise I am usding online batch learning where weights are updated after each record is feed to algorithm.  
-		#Compile,fit model and evaluate on test data. fit and evaluation.
+		#Compile,fit model and evaluate on test data. 
 		model_1.compile(optimizer='adam', loss='binary_crossentropy',metrics=['acc'])
-		#Spliting the trainning data into a 30/20 split where 20% of records will be used in training to help the model learn from it's errors.
+		#Data already split randomly into an 80/20 train/test split. 
+		#Further to that split the training data is then split 80/20 where 20% of records will be used for validation during training.
 		history_1 = model_1.fit(X_train, y_train, epochs=7, callbacks=[lr],batch_size=1, 
 		           validation_split=0.20, shuffle=True, verbose=0)		 
 		model_1.evaluate(X_test, y_test, verbose=0,batch_size=1)
