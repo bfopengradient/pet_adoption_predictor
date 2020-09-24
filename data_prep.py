@@ -97,7 +97,7 @@ class prep_pets:
         #Save a record of the feature set used in my predictor matrix to the mysql dbpets data base. Resulting table is called 'df_embeddings'.
 		df_embeddings['list'].to_sql(name='df_embeddings',con=con,if_exists='replace')
 
-		#Return the X matrix as a list.  
+		#Return the X matrix as a list and also the target variable  
 		return df_embeddings['list'].astype(str),records['Target']
 
 
