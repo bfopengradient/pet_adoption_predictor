@@ -40,7 +40,7 @@ class pets:
 	''' Class that takes the data prepared via the prep_pets class for use in the machine learning algorithm below ''' 
 
 
-    #Print accuracy score
+        #Print accuracy score
 	def print_metrics(self,y):
 	    pred_round_1 = np.round(self, decimals=0,out=None)     
 	    acc= accuracy_score(y, pred_round_1) 
@@ -67,7 +67,7 @@ class pets:
 
         #Main method to run model and generate accuracy score with plot of model learning history, feed in X(data) and y(labels) matrices.
 	def run_model(data,labels):		  
-        #Tokenize and pad records to uniform length oof 23 tokens per record.
+        #Tokenize and pad records to uniform length of 23 tokens per record.
 		t = Tokenizer()
 		embed= data.astype(str)
 		t.fit_on_texts(embed)
@@ -76,7 +76,7 @@ class pets:
 		encoded_docs = t.texts_to_sequences(embed) 
 		#Pad records to a max length of 23 tokens per record.
 		max_length = 23
-		#padded docs is the predictor matrix that will be later split into train/test data.
+		#Padded docs is the predictor matrix that will be later split into train/test data.
 		padded_docs = pad_sequences(encoded_docs, maxlen=max_length, padding='post')
 
 		#Splitting train/test data 80/20 but will also further split the training data to use 20% for validation during training. 
@@ -131,27 +131,26 @@ class pets:
 		model_1.add(ls2)
 
 		#6th layer
-		#Final fully Connected Dense layer with sigmoidal logistic regression function.
+		#Final fully connected Dense layer with sigmoidal logistic regression function.
 		d = Dense(1, activation='sigmoid')
 		model_1.add(d)
 
-		#Using reduce learning rate on val_accuracy plateau with a patience of one Epoch
+		#Using reduce learning rate on val_accuracy with a patience of one Epoch.
 		lr = keras.callbacks.ReduceLROnPlateau(monitor='val_acc', factor=0.15, 
 		                                  patience=1, verbose=0, mode='auto', cooldown=0, min_lr=0)
-		output= model_1.layers[0].output
+		 
 
 		 
-		#For this exercise I am usding online batch learning where weights are updated after each record is feed to algorithm.  
+		#For this exercise I am using online batch learning where weights are updated after each record is feed to algorithm.  
 		#Compile,fit model and evaluate on test data.  
 		model_1.compile(optimizer='adam', loss='binary_crossentropy',metrics=['acc'])
-		#Spliting the trainning data into a 30/20 split where 20% of records will be used in training to help the model learn from it's errors.
+		#Spliting the training data into a 80/20 split where 20% of records will be used in training to help the model learn from it's errors.
 		history_1 = model_1.fit(X_train, y_train, epochs=7, callbacks=[lr],batch_size=1, 
 		           validation_split=0.20, shuffle=True, verbose=0)		 
 		model_1.evaluate(X_test, y_test, verbose=0,batch_size=1)
 		pred_cnn = model_1.predict(X_test, batch_size=1,verbose=0)
 
-
-
+		
                 #Produce accuracy and plot of model learning.
 		pets.print_metrics(pred_cnn,y_test) 
 		pets.plot_model(history_1)
