@@ -65,7 +65,7 @@ class pets:
 	    plt.show() 
 
 
-    #Main method to run model and generate accuracy score with plot of model learning history, feed in X(data) and y(labels) matrices.
+        #Main method to run model and generate accuracy score with plot of model learning history, feed in X(data) and y(labels) matrices.
 	def run_model(data,labels):		  
         #Tokenize and pad records to uniform length oof 23 tokens per record.
 		t = Tokenizer()
@@ -88,7 +88,7 @@ class pets:
 		print(y_test.value_counts())
 		print('')
 
-        #Keep record of a predictor matrix used in the model. Save table as 'X_train' in the dbpets database.    
+                #Keep record of a predictor matrix used in the model. Save table as 'X_train' in the dbpets database.    
 		pd.DataFrame(X_train).to_sql(name='X_train',con=con,if_exists='replace')
  
 
@@ -152,7 +152,7 @@ class pets:
 
 
 
-        #Produce accuracy and plot of model learning.
+                #Produce accuracy and plot of model learning.
 		pets.print_metrics(pred_cnn,y_test) 
 		pets.plot_model(history_1)
 	 	
