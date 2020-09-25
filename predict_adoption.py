@@ -88,13 +88,13 @@ class pets:
 		print(y_test.value_counts())
 		print('')
 
-        #Keep record of apredictor matrix used in the model. Save table as 'X_train' in the dbpets database.    
+        #Keep record of a predictor matrix used in the model. Save table as 'X_train' in the dbpets database.    
 		pd.DataFrame(X_train).to_sql(name='X_train',con=con,if_exists='replace')
  
 
 
 		#Structure of neural net: CNN with Max pooling layer feeding into two LSTM layers. Longer term memory kept on in first LSTM layer
-		#second LSTM layer uses heavier regularisation before final dense fully connected layer votes. The idea is to reduce weight matrix and complexity
+		#second LSTM layer uses heavier regularisation before final dense fully connected layer votes. The idea is to reduce weight matrix size and complexity
 		#before the final layer is asked to predict whether the pet is going to be adopted or not.
 
 		#Using Keras sequential API 
@@ -143,7 +143,7 @@ class pets:
 
 		 
 		#For this exercise I am usding online batch learning where weights are updated after each record is feed to algorithm.  
-		#Compile,fit model and evaluate on test data. fit and evaluation.
+		#Compile,fit model and evaluate on test data.  
 		model_1.compile(optimizer='adam', loss='binary_crossentropy',metrics=['acc'])
 		#Spliting the trainning data into a 30/20 split where 20% of records will be used in training to help the model learn from it's errors.
 		history_1 = model_1.fit(X_train, y_train, epochs=7, callbacks=[lr],batch_size=1, 
