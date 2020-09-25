@@ -93,9 +93,8 @@ class pets:
  
 
 
-		#Structure of neural net: CNN with Max pooling layer feeding into two LSTM layers. Longer term memory kept on in first LSTM layer
-		#second LSTM layer uses heavier regularisation before final dense fully connected layer votes. The idea is to reduce weight matrix size and complexity
-		#before the final layer is asked to predict whether the pet is going to be adopted or not.
+		#Structure of neural net: CNN with Max pooling layer feeding into two LSTM layers.  
+		#Second LSTM layer uses heavier regularisation before final dense fully connected layer votes.  
 
 		#Using Keras sequential API 
 		model_1 = Sequential()
