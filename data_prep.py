@@ -18,7 +18,7 @@ class prep_pets:
 		sparsity = 1.0 - ( count_nonzero(X) / float(X.size) )
 		print('Sparsity check:',sparsity) 
 
-    #Function created by other researchers to get length of time an animal is in the shelter
+        #Function created by other researchers to get length of time an animal is in the shelter
 	def get_days_length(val):
 	    val = str(val)
 	    days = re.findall('\d*',val)[0]
@@ -44,7 +44,7 @@ class prep_pets:
 	        return np.nan
 	    
 	 
-    #Feed in data, do some feature engineering, create one string for each record.
+        #Feed in data, do some feature engineering, create one string for each record.
 	def produce_predictor_matrix():
 
 		#Connect to mysql database 'dbpets' and retrive the 'records' table which is data used by the other researchers. Then create a dataframe called 'records' from that table to work with below.
@@ -62,14 +62,14 @@ class prep_pets:
 		records['DateTime_length'] = records['DateTime_outcome'] - records['DateTime_intake']
 		records['Days_length'] = records['DateTime_length'].apply(prep_pets.get_days_length)		 
 
-	    #My engineered feature 
+	        #My engineered feature 
 		#Get the day month year of animal intake. convert each to string and use each result as a token. 
 		records['Month_intake'] = pd.to_datetime(records['DateTime_intake']) 
 		records['day_intake']= (records['Month_intake'].dt.day).astype(str) 
 		records['month_intake']= (records['Month_intake'].dt.month).astype(str) 
 		records['year_intake']= (records['Month_intake'].dt.year).astype(str) 
 
-        #This is the feature set I will work with 
+                #This is the feature set I will work with 
 		df_embeddings=records[[ 'Name_intake',  
 	       'Intake_Type', 'IntakeCondition',
 	       'Animal_Type_intake', 'Sex', 'Age', 'Breed_intake', 'Color_intake',
@@ -79,7 +79,7 @@ class prep_pets:
 		df_embeddings.replace(np.nan,'missing',regex=True,inplace=True)
 
 
-        #Create one string from each record
+               #Create one string from each record
 		df_embeddings['list'] = df_embeddings['Name_intake'].str.cat(df_embeddings['Intake_Type'],sep=" ")\
 		                       .str.cat(df_embeddings['IntakeCondition'],sep=" ")\
 		                       .str.cat(df_embeddings['Animal_Type_intake'],sep=" ")\
@@ -94,7 +94,7 @@ class prep_pets:
 		                       .str.cat(df_embeddings['year_intake'],sep=" ") 
 
 
-        #Save a record of the feature set used in my predictor matrix to the mysql dbpets data base. Resulting table is called 'df_embeddings'.
+                #Save a record of the feature set used in my predictor matrix to the mysql dbpets data base. Resulting table is called 'df_embeddings'.
 		df_embeddings['list'].to_sql(name='df_embeddings',con=con,if_exists='replace')
 
 		#Return the X matrix as a list and also the target variable  
