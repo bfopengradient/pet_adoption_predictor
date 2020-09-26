@@ -117,7 +117,6 @@ class pets:
 		              
 		#4th layer     
 		#LSTM 1st layer. Using some random dropout and some regularisation ahead of second LSTM layer. 
-		#Expanding dimensionality again before shrinking it again below.
 		ls1= LSTM(100, input_shape=(50, 1),kernel_initializer='glorot_normal',
 		          return_sequences=True,activation='relu',dropout=0.1,
 		          recurrent_dropout=0.1)
