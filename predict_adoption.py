@@ -45,7 +45,7 @@ class pets:
 	''' Class that takes the data prepared via the prep_pets class for use in the machine learning algorithm below ''' 
 
 
-    #Print accuracy score
+        #Print accuracy score
 	def print_metrics(self,y):
 	    pred_round_1 = np.round(self, decimals=0,out=None)     
 	    acc= accuracy_score(y, pred_round_1) 
@@ -70,7 +70,7 @@ class pets:
 	    plt.show() 
 
 
-    #Main method to run model and generate accuracy score with plot of model learning history, feed in X(data) and y(labels) matrices.
+        #Main method to run model and generate accuracy score with plot of model learning history, feed in X(data) and y(labels) matrices.
 	def run_model(data,labels):		  
         #Tokenize and pad records to uniform length of 23 tokens per record.
 		t = Tokenizer()
@@ -94,7 +94,7 @@ class pets:
 		print(y_test.value_counts())
 		print('')
 
-        #Keep record of the predictor matrix used in the model. Save table as 'X_train' in the dbpets database.    
+                #Keep record of the predictor matrix used in the model. Save table as 'X_train' in the dbpets database.    
 		pd.DataFrame(X_train).to_sql(name='X_train',con=con,if_exists='replace')
 		#Save copy of the predictior matrix to a csv file, insert your file path. 
 		pd.DataFrame(X_train).to_csv('/your file path/my_predictor_matrix.csv')
@@ -162,7 +162,7 @@ class pets:
 		#For this exercise I am using online batch learning where weights are updated after each record is feed to algorithm.  
 		#Compile,fit model and evaluate on test data.  
 		model_1.compile(optimizer='adam', loss='binary_crossentropy',metrics=['acc'])
-		#Spliting the trainning data into a 30/20 split where 20% of records will be used in training to help the model learn from it's errors.
+		#Spliting the training data into a 30/20 split where 20% of records will be used in training to help the model learn from it's errors.
 		history_1 = model_1.fit(X_train, y_train, epochs=7, callbacks=[lr],batch_size=1, 
 		           validation_split=0.20, shuffle=True, verbose=0)		 
 		model_1.evaluate(X_test, y_test, verbose=0,batch_size=1)
@@ -170,7 +170,7 @@ class pets:
 
 
 
-        #Produce accuracy and plot of model learning.
+                #Produce accuracy and plot of model learning.
 		pets.print_metrics(pred_cnn,y_test) 
 		pets.plot_model(history_1)
 		 
