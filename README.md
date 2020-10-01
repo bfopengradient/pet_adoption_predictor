@@ -11,7 +11,7 @@ no data on the people visiting the animal shelter who may or may not adopt a pet
 
 The objective here was to see how this model would behave on this classification task after I had addressed sparsity in the predictor matrix.
 
-The target variable is split 58%/42% in favor of the non-adopoted outcomes. Accuracy levels of my model were arpox 77%. f scores were aprox 73%.
+The target variable is split 58%/42% in favor of the non-adopoted outcomes. Accuracy levels of my model was arpox 77%. f scores were aprox 73%.
 
 BF
   
